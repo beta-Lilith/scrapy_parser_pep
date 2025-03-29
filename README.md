@@ -14,7 +14,7 @@ git clone git@github.com:beta-Lilith/scrapy_parser_pep
 ```  
 Перейти в директорию проекта  
 ```
-cd scrapy_parser_pep/
+cd scrapy_parser_pep/  
 ```  
 Создать и активировать виртуальное окружение, установить зависимости  
 ```
@@ -30,7 +30,7 @@ pip install - r requirements.txt
 ```
 scrapy crawl pep
 ```  
-Готово!
+Готово!  
 
 ## АВТОР  
 Оскомова Ксения ([github](https://github.com/beta-Lilith))
