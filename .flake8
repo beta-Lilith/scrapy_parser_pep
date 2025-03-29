@@ -1,6 +1,6 @@
 [flake8]
 ignore = D100
-disable-noqa = True
+disable-noqa = False
 paths = 
     ./pep_parse
 max-complexity = 10
