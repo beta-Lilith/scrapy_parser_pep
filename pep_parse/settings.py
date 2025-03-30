@@ -10,7 +10,7 @@
 BOT_NAME = 'pep_parse'
 
 SPIDER_MODULES = ['pep_parse.spiders']
-NEWSPIDER_MODULE = 'pep_parse.spiders'
+NEWSPIDER_MODULE = SPIDER_MODULES[0]
 
 
 # Crawl responsibly by identifying yourself (and your website)on the user-agent

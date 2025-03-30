@@ -6,12 +6,17 @@ from pathlib import Path
 from .settings import RESULTS
 
 BASE_DIR = Path(__file__).parent.parent
-DT_FORMAT = "%Y-%m-%d_%H-%M-%S"
+DT_FORMAT = '%Y-%m-%d_%H-%M-%S'
 STATUS = 'Status'
 QUANTITY = 'Quantity'
+TOTAL = 'Total'
 
 
 class PepParsePipeline:
+    def __init__(self):
+        self.results_dir = BASE_DIR / RESULTS
+        self.results_dir.mkdir(exist_ok=True)
+
     def open_spider(self, spider):
         self.statuses = defaultdict(int)
 
@@ -20,23 +25,15 @@ class PepParsePipeline:
         return item
 
     def close_spider(self, spider):
-        results_dir = BASE_DIR / RESULTS
-        results_dir.mkdir(exist_ok=True)
         filename = f'status_summary_{datetime.now().strftime(DT_FORMAT)}.csv'
         with open(
-            f'{results_dir}/{filename}',
+            f'{self.results_dir}/{filename}',
             'w',
             encoding='utf-8',
-            newline=''
+            newline='',
         ) as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=[STATUS, QUANTITY])
-            writer.writeheader()
-            for status, quantity in self.statuses.items():
-                writer.writerow({
-                    STATUS: status,
-                    QUANTITY: quantity
-                })
-            writer.writerow({
-                STATUS: 'Total',
-                QUANTITY: sum(self.statuses.values())
-            })
+            csv.writer(csvfile).writerows((
+                (STATUS, QUANTITY),
+                *self.statuses.items(),
+                (TOTAL, sum(self.statuses.values()))
+            ))
