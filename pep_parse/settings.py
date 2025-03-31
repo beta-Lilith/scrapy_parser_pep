@@ -9,8 +9,8 @@
 
 BOT_NAME = 'pep_parse'
 
-SPIDER_MODULES = ['pep_parse.spiders']
-NEWSPIDER_MODULE, *other_modules = SPIDER_MODULES
+NEWSPIDER_MODULE = 'pep_parse.spiders'
+SPIDER_MODULES = [NEWSPIDER_MODULE]
 
 
 # Crawl responsibly by identifying yourself (and your website)on the user-agent

@@ -1,12 +1,12 @@
 Status,Quantity
 Active,34
-Accepted,20
 Final,331
 Superseded,24
-Deferred,35
-Withdrawn,66
 Rejected,124
+Withdrawn,66
 April Fool!,1
-Draft,44
+Deferred,35
+Draft,45
+Accepted,20
 Provisional,1
-Total,680
+Total,681
