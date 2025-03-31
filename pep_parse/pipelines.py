@@ -25,14 +25,15 @@ class PepParsePipeline:
         return item
 
     def close_spider(self, spider):
-        filename = f'status_summary_{datetime.now().strftime(DT_FORMAT)}.csv'
+        filename = 'status_summary_{date}.csv'.format(
+            date=datetime.now().strftime(DT_FORMAT))
         with open(
             f'{self.results_dir}/{filename}',
             'w',
             encoding='utf-8',
-            newline='',
+            newline=''
         ) as csvfile:
-            csv.writer(csvfile).writerows((
+            csv.writer(csvfile, dialect=csv.excel).writerows((
                 (STATUS, QUANTITY),
                 *self.statuses.items(),
                 (TOTAL, sum(self.statuses.values()))

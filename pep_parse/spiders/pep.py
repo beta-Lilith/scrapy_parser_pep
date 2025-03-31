@@ -10,14 +10,15 @@ class PepSpider(scrapy.Spider):
 
     def parse(self, response):
         for pep in response.css(
-                'a.pep.reference.internal::attr(href)').getall():
+            'a.pep.reference.internal::attr(href)'
+        ).getall():
             yield response.follow(pep, callback=self.parse_pep)
 
     def parse_pep(self, response):
-        pep_title = response.css('h1.page-title::text').get().split()
+        _, number, _, *name = response.css('h1.page-title::text').get().split()
         yield PepParseItem(
-            number=pep_title[1],
-            name=' '.join(pep_title[3:]),
+            number=number,
+            name=' '.join(name),
             status=response.css(
                 'dt:contains("Status") + dd abbr::text').get(),
         )
